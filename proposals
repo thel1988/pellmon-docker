@@ -1,0 +1,35 @@
+FROM ubuntu:latest
+
+ADD https://github.com/motoz/PellMon/releases/download/v0.7.0/pellmon_0.7.0-1_all.deb /
+
+ENV TZ=Europe/Copenhagen
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install -y \
+    rrdtool \
+    python-serial \
+    python-cherrypy3 \
+    python-dbus \
+    python-mako \
+    python-gobject \
+    python-simplejson \
+    python-dateutil \
+    python-ws4py \
+    python-crypto \
+    autoconf \
+    python-argcomplete \
+    python-pip
+RUN dpkg -i /pellmon_0.7.0-1_all.deb
+RUN pip install pyownet
+RUN pip install xtea
+
+EXPOSE 8081
+VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
+
+
+
+
+## run dbus as supervisord config file 
+## /usr/bin/dbus-daemon --system will include the config file.
+/usr/bin/python /usr/bin/pellmonsrv start --PIDFILE=/var/run/pellmonsrv/pellmonsrv.pid --USER=pellmonsrv --GROUP=nogroup --DBUS=SYSTEM --PLUGINDIR=/usr/local/lib/python2.7/dist-packages/Pellmonsrv/plugins --OLDPLUGINDIR=/usr/local/lib/Pellmonsrv/plugins/
+/usr/bin/python /usr/bin/pellmonweb -D --PIDFILE /var/run/pellmonweb/pellmonweb.pid --USER=pellmonweb --GROUP=nogroup --DBUS=SYSTEM
