@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:stable-slim
 
 ADD https://github.com/motoz/PellMon/releases/download/v0.7.0/pellmon_0.7.0-1_all.deb /
 
@@ -30,8 +30,6 @@ VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-
-## run dbus as supervisord config file 
-## /usr/bin/dbus-daemon --system will include the config file.
-/usr/bin/python /usr/bin/pellmonsrv start --PIDFILE=/var/run/pellmonsrv/pellmonsrv.pid --USER=pellmonsrv --GROUP=nogroup --DBUS=SYSTEM --PLUGINDIR=/usr/local/lib/python2.7/dist-packages/Pellmonsrv/plugins --OLDPLUGINDIR=/usr/local/lib/Pellmonsrv/plugins/
-/usr/bin/python /usr/bin/pellmonweb -D --PIDFILE /var/run/pellmonweb/pellmonweb.pid --USER=pellmonweb --GROUP=nogroup --DBUS=SYSTEM
+CMD ["/usr/sbin/dbus-uuidgen > /var/lib/dbus/machine-id"]
+CMD ["mkdir -p /var/run/dbus"]
+CMD ["/usr/bin/supervisord"]
