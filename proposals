@@ -18,15 +18,17 @@ RUN apt-get update && apt-get install -y \
     python-crypto \
     autoconf \
     python-argcomplete \
-    python-pip
+    python-pip \
+    supervisor
 RUN dpkg -i /pellmon_0.7.0-1_all.deb
 RUN pip install pyownet
 RUN pip install xtea
+RUN mkdir -p /var/log/supervisor
 
 EXPOSE 8081
 VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 
-
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 
 ## run dbus as supervisord config file 
