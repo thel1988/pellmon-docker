@@ -29,6 +29,8 @@ EXPOSE 8081
 VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD build/confd/*.conf /etc/pellmon/conf.d/
+ADD build/plugins/*.conf /etc/pellmon/conf.d/plugins/
 
 CMD ["/usr/sbin/dbus-uuidgen > /var/lib/dbus/machine-id"]
 CMD ["mkdir -p /var/run/dbus"]
