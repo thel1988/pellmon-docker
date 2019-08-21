@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
 RUN dpkg -i /pellmon_0.7.0-1_all.deb
 RUN pip install pyownet
 RUN pip install xtea
+RUN pip install simplejson
+RUN pip install paho-mqtt
 RUN mkdir -p /var/log/supervisor
 
 EXPOSE 8081
