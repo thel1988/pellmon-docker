@@ -35,7 +35,6 @@ VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD build/confd/*.conf /etc/pellmon/conf.d/
 ADD build/plugins/*.conf /etc/pellmon/conf.d/plugins/
+ADD build/init/init.sh /root/init.sh
 
-CMD ["/usr/sbin/dbus-uuidgen > /var/lib/dbus/machine-id"]
-CMD ["mkdir -p /var/run/dbus"]
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/init.sh"]
