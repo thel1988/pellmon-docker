@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
     python-gobject \
     python-simplejson \
     python-dateutil \
-    python-ws4py \
     python-crypto \
     autoconf \
     python-argcomplete \
@@ -27,6 +26,7 @@ RUN pip install pyownet
 RUN pip install xtea
 RUN pip install simplejson
 RUN pip install paho-mqtt
+RUN pip install ws4py
 RUN mkdir -p /var/log/supervisor
 
 EXPOSE 8081
