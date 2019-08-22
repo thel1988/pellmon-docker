@@ -29,12 +29,10 @@ RUN pip install paho-mqtt
 VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 RUN dpkg -i /pellmon_0.7.0-1_all.deb
 RUN mkdir -p /var/log/supervisor
-
 EXPOSE 8081
-
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD build/confd/*.conf /etc/pellmon/conf.d/
 ADD build/plugins/*.conf /etc/pellmon/conf.d/plugins/
 ADD build/init/init.sh /root/init.sh
-
+RUN chmod +x /root/init.sh
 ENTRYPOINT ["/root/init.sh"]
