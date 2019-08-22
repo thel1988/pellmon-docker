@@ -29,6 +29,8 @@ RUN pip install paho-mqtt
 VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 RUN dpkg -i /pellmon_0.7.0-1_all.deb
 RUN mkdir -p /var/log/supervisor
+RUN mkdir -p /var/run/pellmonsrv/
+RUN mkdir -p /var/run/pellmonweb/
 EXPOSE 8081
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD build/confd/*.conf /etc/pellmon/conf.d/
