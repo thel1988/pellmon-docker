@@ -1,3 +1,23 @@
+**TO DO list:
+
+mkdir -p /usr/local/lib/Pellmonsrv/plugins/
+mkdir -p /usr/local/var/lib/pellmon
+mkdir -p /usr/local/var/log/pellmonsrv
+mkdir -p /usr/local/var/log/pellmonweb
+chmod 777 /usr/local/var/log/pellmonsrv
+chmod 777 /usr/local/var/log/pellmonweb
+chown -R pellmonsrv:nogroup /usr/local/var/log/pellmonsrv/
+chown -R pellmonweb:root /usr/local/var/log/pellmonweb
+chown -R pellmonsrv:nogroup /usr/local/var/lib/pellmon/
+
+dbus skal køres via init script
+init script skal ændres
+fjern fra supervisord.conf
+
+Python skal køres i forgrunden
+https://serverfault.com/questions/608069/managing-daemons-with-supervisor-no-foreground-mode-available
+
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
