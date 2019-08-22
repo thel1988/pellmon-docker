@@ -34,6 +34,7 @@ RUN mkdir -p /var/run/pellmonweb/
 EXPOSE 8081
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD build/confd/*.conf /etc/pellmon/conf.d/
+ADD build/conf/pellmon.conf /etc/pellmon/pellmon.conf
 ADD build/plugins/*.conf /etc/pellmon/conf.d/plugins/
 ADD build/init/init.sh /root/init.sh
 RUN chmod +x /root/init.sh
