@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM debian:jessie-slim
 
 ADD https://github.com/motoz/PellMon/releases/download/v0.7.0/pellmon_0.7.0-1_all.deb /
 RUN mkdir -p /opt/pellmonmqtt
@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     python-dateutil \
     python-crypto \
     autoconf \
+    python-ws4py \
     python-argcomplete \
     python-pip \
     supervisor
@@ -25,7 +26,6 @@ RUN pip install pyownet
 RUN pip install xtea
 RUN pip install simplejson
 RUN pip install paho-mqtt
-RUN pip install ws4py
 VOLUME ["/etc/pellmon", "/var/lib/pellmon"]
 RUN dpkg -i /pellmon_0.7.0-1_all.deb
 RUN mkdir -p /var/log/supervisor
