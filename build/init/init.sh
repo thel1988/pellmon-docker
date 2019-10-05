@@ -7,6 +7,8 @@ sed -i -r "s/^serial.*/serial = ${nbeserial}/g" /etc/pellmon/conf.d/plugins/nbec
 sed -i -r "s/^password.*/password = ${nbepass}/g" /etc/pellmon/conf.d/plugins/nbecom.conf
 sed -i -r "s/pellmonMQTT.py.*/pellmonMQTT.py -H ${mqtthost} -p ${mqttport} -d SYSTEM\"/g" /etc/supervisor/conf.d/supervisord.conf
 
+rm /run/dbus/pid
+
 CONTAINER_ALREADY_STARTED="/tmp/CONTAINER_ALREADY_STARTED"
 if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     touch $CONTAINER_ALREADY_STARTED
