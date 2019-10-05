@@ -29,12 +29,13 @@ class DbusNotConnected(Exception):
     pass
 
 class Dbus_handler:
-    def __init__(self, mq, bus='SESSION'):
+    def __init__(self, mq, bus, mqttTopic):
         if bus=='SYSTEM':
             self.bustype=Gio.BusType.SYSTEM
         else:
             self.bustype=Gio.BusType.SESSION
         self.mq = mq
+        self.mqttTopic = mqttTopic
 
     def start(self):
         self.notify = None
@@ -62,16 +63,16 @@ class Dbus_handler:
         for item in self.db:
             try:
                 value = self.getItem(item['name'])
-                print 'Publish %s to pellmon/%s'%(value, item['name'])
-                self.mq.publish("pellmon/%s"%item['name'], value, qos=2, retain=True)
+                print 'Publish %s to %s/%s'%(self.mqttTopic, value, item['name'])
+                self.mq.publish("%s/%s"%(self.mqttTopic, item['name']), value, qos=2, retain=True)
             except:
                 pass
 
         #Subscribe to all data items tagged with 'Settings' at pellmon/settings/_item
         self.settings = self.notify.GetFullDB('(as)',['Settings',])
         for item in self.settings:
-            print 'Subscribe to pellmon/settings/%s'%item['name']
-            self.mq.subscribe("pellmon/settings/%s"%item['name'])
+            print 'Subscribe to %s/settings/%s'%(self.mqttTopic,item['name'])
+            self.mq.subscribe("%s/settings/%s"%(self.mqttTopic,item['name']))
 
         #Listen to the DBUS 'item changed' signal and publish changes at pellmon/_item_
         def on_signal(proxy, sender_name, signal_name, parameters):
@@ -80,8 +81,8 @@ class Dbus_handler:
             msg = simplejson.loads(p)
             print msg	
             for d in msg:
-                self.mq.publish("pellmon/%s"%d['name'], d['value'], qos=2, retain=True)
-                print 'Publish %s to pellmon/%s'%(d['value'], d['name'])
+                self.mq.publish("%s/%s"%(self.mqttTopic,d['name']), d['value'], qos=2, retain=True)
+                print 'Publish %s to %s/%s'%(d['value'], self.mqttTopic, d['name'])
 
         self.notify.connect("g-signal", on_signal)
 
@@ -157,7 +158,7 @@ if __name__ == "__main__":
     parser.add_argument('-H', '--host', default='localhost', help='mqtt host to connect to. Defaults to localhost')
     parser.add_argument('-p', '--port', default='1883', help='network port to connect to. Defaults to 1883')
     parser.add_argument('-d', '--dbus', default='SESSION', choices=['SESSION', 'SYSTEM'], help='which bus to use, SESSION is default')
-
+    parser.add_argument('-t', '--topic', default='pellmon', help='Defines the topic to publish/listen to, default is pellmon')
     args = parser.parse_args()
 
     GObject.threads_init()
@@ -186,7 +187,7 @@ if __name__ == "__main__":
     
     mqttc.loop_start()
 
-    dbus = Dbus_handler(mqttc, args.dbus)
+    dbus = Dbus_handler(mqttc, args.dbus, args.topic)
     dbus.start()
 
     try:
