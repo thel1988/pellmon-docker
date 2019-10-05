@@ -1,0 +1,21 @@
+version: '2'
+services:
+  pellmon:
+    container_name: pellmon
+    volumes:
+      - rrd:/usr/local/var/lib/pellmon
+    environment:
+      - loglevel=debug
+      - webport=8090
+      - mqtthost=localhost
+      - mqttport=1883
+      - nbeserial=10039 #can be found on furnace menu 18
+      - nbepass=t #can be found on furnace menu 18
+      - webuser=admin
+      - webpass=Filur123
+    network_mode: host
+    image: pellmon
+    build: build/
+
+volumes:
+  rrd:
