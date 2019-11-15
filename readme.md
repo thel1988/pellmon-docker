@@ -6,7 +6,7 @@ This docker Container is a clone Pellmon application so it is runable from a doc
 Which also support mqtt forwarding, in my instance to my Hassio instance
 
 This docker container have the following variables which can be set
-##### Default
+##### Default Variables
 ```
 loglevel=info 
 webport=8081 
@@ -17,5 +17,4 @@ nbepass=notinuseithink
 mqtthost=localhost 
 mqttport=1883 
 mqtttopic=pellmon
-</pre>
 ```
