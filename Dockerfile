@@ -43,3 +43,5 @@ ENV loglevel=info webport=8081 webuser=testuser webpass=12345 nbeserial=0 nbepas
 VOLUME ["/usr/local/var/lib/pellmon/", "/usr/local/var/log/"]
 
 ENTRYPOINT ["/opt/init.sh"]
+
+EXPOSE 8081
