@@ -17,4 +17,6 @@ nbepass=notinuseithink
 mqtthost=localhost 
 mqttport=1883 
 mqtttopic=pellmon
+mqttuser=user
+mqttpass=pass
 ```

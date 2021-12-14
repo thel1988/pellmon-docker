@@ -159,6 +159,8 @@ if __name__ == "__main__":
     parser.add_argument('-p', '--port', default='1883', help='network port to connect to. Defaults to 1883')
     parser.add_argument('-d', '--dbus', default='SESSION', choices=['SESSION', 'SYSTEM'], help='which bus to use, SESSION is default')
     parser.add_argument('-t', '--topic', default='pellmon', help='Defines the topic to publish/listen to, default is pellmon')
+    parser.add_argument('-u', '--username', default='', help='Define a username which will be used to connect to the mqtt broker')
+    parser.add_argument('-P', '--password', default='', help='Define a password which will be used to connect to the mqtt broker')
     args = parser.parse_args()
 
     GObject.threads_init()
@@ -175,6 +177,7 @@ if __name__ == "__main__":
     connect = False
     while not connect:
         try:
+            mqttc.username_pw_set(username=args.username, password=args.password)
             mqttc.connect(args.host, args.port, 60)
             #mqttc.reconnect_delay_set(120, 300, True)
             #mqttc.reconnect_delay_set(120, 300, True)    

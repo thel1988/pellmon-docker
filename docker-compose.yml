@@ -11,8 +11,10 @@ services:
       - mqttport=1883
       - nbeserial=10039 #can be found on furnace menu 18
       - nbepass=t #can be found on furnace menu 18
-      - webuser=admin
-      - webpass=Filur123
+      - webuser=user
+      - webpass=password
+      - mqttuser=user
+      - mqttpass=pass
     network_mode: host
     image: pellmon
     build: build/
