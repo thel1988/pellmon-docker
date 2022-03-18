@@ -83,8 +83,8 @@ class Dbus_handler:
         self.settings = self.notify.GetFullDB('(as)',['All',])
         for item in self.settings:
             if item['type'] in ('W', 'R/W'):
-                print 'Subscribe to %s/%s/%s'%item['name']
-                self.mq.subscribe("%s/%s/%s"%item['name'])
+                print 'Subscribe to %s/settings/%s'%(self.mqttTopic,item['name'])
+                self.mq.subscribe("%s/settings/%s"%(self.mqttTopic,item['name']))
 
         self.notify.connect("g-signal", on_signal)
 
