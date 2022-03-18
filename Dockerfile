@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip install pycairo pyownet xtea paho-mqtt ws4py argcomplete crypto python-dateutil simplejson mako dbus-python CherryPy pyserial arrow==0.12.0
 
+RUN pip3 install paho-mqtt simplejson
+
 ADD pellmonMQTT.py /opt/
 ADD pellmon.v0.7.0.tar.gz .
 
