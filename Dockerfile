@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     rrdtool \
     autoconf \
     python-pip \
+    python3-pip \
     pkg-config \
     supervisor \
     libglib2.0-dev \
