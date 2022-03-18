@@ -4,6 +4,7 @@ PellMon
 
 This docker Container is a clone Pellmon application so it is runable from a docker container
 Which also support mqtt forwarding, in my instance to my Hassio instance
+Plus a try to reconnect
 
 This docker container have the following variables which can be set
 ##### Default Variables
