@@ -155,7 +155,7 @@ if __name__ == "__main__":
         print 'subscribed'
 
     def on_disconnect(*args):
-        print "disconnecting reason";
+        print "disconnected from MQTT: ";
         mqtt_connected=False
 
     def on_message(*args):
