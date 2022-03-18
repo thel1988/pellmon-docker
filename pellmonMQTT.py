@@ -207,7 +207,7 @@ if __name__ == "__main__":
     while not connect:
         try:
             mqttc.username_pw_set(username=args.username, password=args.password)
-            mqttc.connect(args.host, args.port, 60)
+            mqttc.connect(args.host, int(args.port), 60)
             #mqttc.reconnect_delay_set(120, 300, True)
             #mqttc.reconnect_delay_set(120, 300, True)
             mqttc.reconnect_delay_set(min_delay=1, max_delay=120)
