@@ -154,6 +154,10 @@ if __name__ == "__main__":
         pass #print 'subscribed'
         print 'subscribed'
 
+    def on_disconnect(*args):
+        print "disconnecting reason";
+        mqtt_connected=False
+
     def on_message(*args):
         """Call the DBUS setItem method with item name and payload from topic subscription at pellmon/settings/_item_"""
         print 'subscribed item changed'
