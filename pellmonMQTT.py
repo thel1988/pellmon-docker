@@ -196,7 +196,7 @@ if __name__ == "__main__":
     mqttc.on_subscribe = on_subscribe
     mqttc.on_message = on_message
 
-    dbus = Dbus_handler(mqttc, args.dbus)
+    dbus = Dbus_handler(mqttc, args.dbus,args.topic)
     dbus.start()
     
     connect = False
