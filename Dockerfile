@@ -38,7 +38,7 @@ RUN mkdir -p /var/log/supervisor/ \
     /usr/local/var/log/pellmonsrv/ \
     && touch /usr/local/var/log/pellmonsrv/pellmon.log 
 
-ENV loglevel=info webport=8081 webuser=testuser webpass=12345 nbeserial=0 nbepass=notinuseithink mqtthost=localhost mqttport=1883 mqtttopic=pellmon
+ENV loglevel=info webport=8081 webuser=testuser webpass=12345 nbeserial=0 nbepass=notinuseithink mqtthost=localhost mqttport=1883 mqtttopic=pellmon mqttuser=mosquitto mqttpass=mosquitto
 
 VOLUME ["/usr/local/var/lib/pellmon/", "/usr/local/var/log/"]
 
