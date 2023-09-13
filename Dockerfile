@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     libcairo2-dev \
     python-gobject
 
-RUN pip install pycairo pyownet xtea paho-mqtt ws4py argcomplete crypto python-dateutil simplejson mako dbus-python CherryPy pyserial arrow==0.12.0
+RUN pip install pyyaml==5.3.1 pycairo pyownet xtea paho-mqtt ws4py argcomplete crypto python-dateutil simplejson mako dbus-python CherryPy pyserial arrow==0.12.0
 
 RUN pip3 install paho-mqtt simplejson
 
@@ -45,6 +45,6 @@ ENV loglevel=info webport=8081 webuser=testuser webpass=12345 nbeserial=0 nbepas
 
 VOLUME ["/usr/local/var/lib/pellmon/", "/usr/local/var/log/"]
 
-ENTRYPOINT ["/opt/init.sh"]
+ENTRYPOINT ["/bin/bash","/opt/init.sh"]
 
 EXPOSE 8081
